@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Interactivo - Rondizzoni II</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Índice de ubicaciones</h2>
+      <ul id="locationList"></ul>
+    </aside>
+
+    <main class="map-area">
+      <h1>Plano edificio Rondizzoni II</h1>
+      <div class="map-wrapper">
+        <img src="./assets/Frame 1.png" usemap="#image-map" alt="Mapa Rondizzoni II" id="mainMap">
+        <canvas id="highlightCanvas"></canvas>
+
+        <!-- Mapa de coordenadas -->
+        <map name="image-map" id="imageMap">
+          <area alt="Entrada/Salida" title="Entrada/Salida" coords="779,1143,0,1433" shape="rect">
+          <area alt="Direccion de acompañamiento  al aprendizaje y formacion general" title="Direccion de acompañamiento  al aprendizaje y formacion general" coords="1382,1434,785,1145" shape="rect">
+          <area alt="Direccion general de Desarrollo Académico" title="Direccion general de Desarrollo Académico" coords="1382,1432,1386,1145,2148,1145,2148,655,2432,652,2434,1277,2430,1430" shape="poly">
+          <area alt="Direccion de Docencia" title="Direccion de Docencia" coords="1377,1145,2148,1145,2145,655,2432,655,2430,1430,1379,1432" shape="poly">
+          <area alt="Direccion de gestión de Operación Académica" title="Direccion de gestión de Operación Académica" coords="2145,652,2145,1141,1382,1148,1375,1430,2427,1430,2434,655" shape="poly">
+          <area alt="CREA-CINDTAP" title="CREA-CINDTAP" coords="2145,652,2143,1145,1382,1145,1379,1430,2430,1430,2430,652" shape="poly">
+          <area alt="Subdirección de Desarrollo Currícular" title="Subdirección de Desarrollo Currícular" coords="2145,650,2148,1139,1384,1145,1377,1432,2430,1430,2434,655" shape="poly">
+          <area alt="Salida Este" title="Salida Este" coords="2150,648,2434,469" shape="rect">
+          <area alt="Subdirección Administrativa  SSGG y OOPP" title="Subdirección Administrativa  SSGG y OOPP" coords="2148,467,2430,2" shape="rect">
+          <area alt="Escaleras 3" title="Escaleras 3" coords="1971,222,2141,2" shape="rect">
+          <area alt="Bodega de Aseo" title="Bodega de Aseo" coords="1597,4,1967,222" shape="rect">
+          <area alt="Baños Personal (Baño accesible)" title="Baños Personal (Baño accesible)" coords="1885,349,1597,228" shape="rect">
+          <area alt="Acensor 2  (EN MANTENIMIENTO)" title="Acensor 2  (EN MANTENIMIENTO)" coords="1597,487,1883,351" shape="rect">
+          <area alt="Subdirectora de Desarrollo Docente e Innovación" title="Subdirectora Desarrollo Docente e Innovación" coords="1595,487,1883,639" shape="rect">
+          <area alt="Subdirectora de Desarrollo Curricular" title="Subdirectora de Desarrollo Curricular" coords="1595,799,1883,642" shape="rect">
+          <area alt="Directora de Emprendimiento" title="Directora de Emprendimiento" coords="1597,801,1881,956" shape="rect">
+          <area alt="Sala Dirección de Acompañamiento al Aprendizaje y formacion General" title="Sala Dirección de Acompañamiento al Aprendizaje y formacion General" coords="1336,952,1592,639" shape="rect">
+          <area alt="Escaleras  1A (subida)" title="Escaleras  1A (subida)" coords="1156,952,1156,747,1009,747,1007,644,1334,646,1336,954" shape="poly">
+          <area alt="Acensor 1v" title="Acensor 1v" coords="1007,954,1153,749" shape="rect">
+          <area alt="Escaleras  1B (bajada)" title="Escaleras  1B (bajada)" coords="841,956,1005,642" shape="rect">
+          <area alt="Via de Evacuación" title="Via de Evacuación" coords="671,954,837,723" shape="rect">
+          <area alt="Baño Academicos" title="Baño Academicos" coords="553,726,841,435" shape="rect">
+          <area alt="Sala Eléctrica" title="Sala Eléctrica" coords="553,433,839,226" shape="rect">
+          <area alt="Subdirección de Investigación" title="Subdirección de Investigación" coords="549,220,841,6" shape="rect">
+          <area alt="Escaleras 2" title="Escaleras 2" coords="295,153,547,6" shape="rect">
+          <area alt="Dirección de Medicina Veterinaria" title="Dirección de Medicina Veterinaria" coords="2,235,293,2" shape="rect">
+          <area alt="Salida Oeste" title="Salida Oeste" coords="2,353,293,237" shape="rect">
+          <area alt="Sala de Academicos/as" title="Sala de Academicos/as" coords="0,1141,293,360" shape="rect">
+          <area alt="Pasillo Oeste" title="Pasillo Oeste" coords="551,954,295,149" shape="rect">
+          <area alt="Pasillo Sur" title="Pasillo Sur" coords="293,1143,2141,958" shape="rect">
+          <area alt="Pasillo Estte" title="Pasillo Estte" coords="1887,958,2143,228" shape="rect">
+        </map>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
