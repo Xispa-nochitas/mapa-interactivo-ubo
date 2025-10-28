@@ -3,7 +3,6 @@ configs:
   - p/owasp-top-ten
   - p/secrets
   - p/ci
-  - rules/ubo-html-security.yml   # ⬅ agrega este ruleset local
 
 paths:
   include:
