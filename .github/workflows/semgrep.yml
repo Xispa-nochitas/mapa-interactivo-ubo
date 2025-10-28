@@ -13,12 +13,20 @@ permissions:
 jobs:
   semgrep:
     runs-on: ubuntu-latest
-    container:
-      image: returntocorp/semgrep:latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Semgrep
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade semgrep
 
       - name: Run Semgrep (HTML, OWASP Top 10, Secrets)
         env:
@@ -37,8 +45,8 @@ jobs:
             --metrics=off
 
       - name: Upload SARIF to GitHub
+        # si el escaneo falla, igual sube el SARIF para ver alertas
         if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: results.sarif
-
