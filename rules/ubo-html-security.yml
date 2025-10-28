@@ -1,32 +1,26 @@
 rules:
   - id: html-missing-csp-meta
-    languages: [generic]              # funciona sobre HTML como texto
-    message: "No se detecta CSP en el HTML. Agrega <meta http-equiv='Content-Security-Policy' ...> o cabecera CSP en el servidor."
+    languages: [generic]
+    message: "Falta CSP en <head>. Agrega meta http-equiv='Content-Security-Policy' o cabecera CSP."
     severity: WARNING
     patterns:
       - pattern: "<head>"
       - pattern-not: "<meta http-equiv=\"Content-Security-Policy\""
     paths:
-      include:
-        - "**/*.html"
-
-  - id: html-target-blank-without-rel
-    languages: [generic]
-    message: "Enlace con target=\"_blank\" sin rel=\"noopener noreferrer\" (riesgo de tabnabbing)."
-    severity: WARNING
-    pattern: "<a ... target=\"_blank\" ...>"
-    metadata:
-      references:
-        - "https://web.dev/external-anchors-use-rel-noopener/"
-    paths:
-      include:
-        - "**/*.html"
+      include: ["**/*.html"]
 
   - id: html-inline-event-handlers
     languages: [generic]
-    message: "Manejador inline (ej. onclick) detectado. Usa addEventListener y sanitiza datos para evitar DOM XSS."
+    message: "Manejador inline (onclick, onload, ...) detectado. Usa addEventListener y sanitiza para evitar DOM XSS."
     severity: WARNING
     pattern-regex: "\\son[a-z]+\\s*="
     paths:
-      include:
-        - "**/*.html"
+      include: ["**/*.html"]
+
+  - id: html-target-blank-without-rel
+    languages: [generic]
+    message: "Enlace con target=\"_blank\" sin rel=\"noopener noreferrer\" (tabnabbing)."
+    severity: WARNING
+    pattern-regex: "<a[^>]*\\starget=\\\"_blank\\\"(?![^>]*rel=)"
+    paths:
+      include: ["**/*.html"]
