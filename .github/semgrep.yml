@@ -1,0 +1,16 @@
+# semgrep.yml
+# Reglas principales
+configs:
+  - p/owasp-top-ten
+  - p/secrets
+  - p/ci
+
+# Opcional: enfocar en HTML/JS del proyecto
+# include/exclude paths para acelerar y reducir ruido
+paths:
+  include:
+    - "**/*.html"
+    - "**/*.js"
+  exclude:
+    - "node_modules/**"
+    - "dist/**"
