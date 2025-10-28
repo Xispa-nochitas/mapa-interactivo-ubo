@@ -1,0 +1,26 @@
+name: Semgrep CI
+on:
+  push:
+    branches: [ main ]
+  pull_request: {}
+
+jobs:
+  semgrep:
+    runs-on: ubuntu-latest
+    # Ejecuta Semgrep desde su contenedor oficial
+    container: returntocorp/semgrep:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Semgrep (HTML, OWASP Top 10, Secrets)
+        env:
+          # Si usarás el dashboard de Semgrep, define este secret en Settings > Secrets > Actions
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+        run: |
+          # Usa tu config y genera SARIF para ver alertas también en GitHub Security
+          semgrep ci --config semgrep.yml --sarif --output results.sarif || true
+
+      - name: Upload SARIF to GitHub
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
