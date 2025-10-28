@@ -2,28 +2,43 @@ name: Semgrep CI
 on:
   push:
     branches: [ main ]
-  pull_request: {}
+  pull_request:
+    branches: [ main ]
 
-# Puedes ponerlo aquí (nivel workflow) o dentro del job:
 permissions:
   contents: read
-  security-events: write     # ⬅ necesario para subir SARIF
-  pull-requests: write       # ⬅ si quieres anotaciones en PR (opcional)
+  security-events: write
+  pull-requests: write
 
 jobs:
   semgrep:
     runs-on: ubuntu-latest
-    container: returntocorp/semgrep:latest
+    container:
+      image: returntocorp/semgrep:latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Run Semgrep (HTML, OWASP Top 10, Secrets)
         env:
-          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}  # opcional
+          SEMGREP_ENABLE_VERSION_CHECK: "0"
         run: |
-          semgrep ci --config semgrep.yml --sarif --output results.sarif || true
+          echo "=== GIT LS-FILES (debug) ==="
+          git ls-files | sed -n '1,200p'
+
+          echo "=== RUNNING SEMGREP ==="
+          semgrep ci \
+            --config semgrep.yml \
+            --include 'index.html' \
+            --sarif --output results.sarif \
+            --no-suppress-errors \
+            --metrics=off
 
       - name: Upload SARIF to GitHub
+        if: always()
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: results.sarif
+
